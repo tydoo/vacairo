@@ -6,7 +6,7 @@ Vacairo est une application non officielle à destination des réservistes de la
 
 Aucune information personnelle n'est sauvegardée par l'application.
 
-Elle utilise le framework Symfony 8.
+Elle utilise le framework Symfony 8 et le template [Tailadmin](https://tailadmin.com)
 
 ## Installation d'un environnement de développement
 
