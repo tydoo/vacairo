@@ -1,0 +1,93 @@
+# config/packages/workflow.yaml
+framework:
+    workflows:
+        vacations:
+            type: 'state_machine'
+            audit_trail:
+                enabled: true
+            marking_store:
+                type: 'method'
+                property: 'state'
+            supports:
+                - App\Entity\Vacation
+            initial_marking: draft
+            places:
+                draft:
+                    metadata:
+                        title: 'Brouillon'
+                        description: 'Demande de vacation en cours de création'
+                sent_to_pn_em:
+                    metadata:
+                        title: "Envoyée a l'état major"
+                        description: "La vacation a été envoyée a l'état major pour approbation"
+                pn_em_rejected:
+                    metadata:
+                        title: "Refusée par l'état major"
+                        description: "La vacation a été refusée par l'état major"
+                pn_em_approved:
+                    metadata:
+                        title: "Approuvée par l'état major"
+                        description: "La vacation a été approuvée par l'état major"
+                gestt_sent:
+                    metadata:
+                        title: 'Créer sur GESTT'
+                        description: 'La vacation a été créée dans GESTT en ASA pour validation par la hiérarchie'
+                gestt_rejected:
+                    metadata:
+                        title: 'Refusée sur GESTT'
+                        description: 'La vacation a été refusée par la hiérarchie sur GESTT'
+                gestt_approved:
+                    metadata:
+                        title: 'Approuvée sur GESTT'
+                        description: 'La vacation a été approuvée par la hiérarchie sur GESTT'
+                completed:
+                    metadata:
+                        title: 'Complétée'
+                        description: 'La vacation a été réalisée'
+                paid:
+                    metadata:
+                        title: 'Payée'
+                        description: 'La vacation a été payée (7h - Hors heures supplémentaires)'
+                
+            transitions:
+                to_pn_em:
+                    from: draft
+                    to:   sent_to_pn_em
+                    metadata:
+                        title: "Envoyer à l'état major"
+                pn_em_reject:
+                    from: sent_to_pn_em
+                    to:   pn_em_rejected
+                    metadata:
+                        title: "Refuser"
+                pn_em_approve:
+                    from: sent_to_pn_em
+                    to:   pn_em_approved
+                    metadata:
+                        title: "Approuver"
+                to_gestt:
+                    from: pn_em_approved
+                    to:   gestt_sent
+                    metadata:
+                        title: 'Créer sur GESTT'
+                gestt_approve:
+                    from: gestt_sent
+                    to:   gestt_approved
+                    metadata:
+                        title: 'Approuver sur GESTT'
+                gestt_reject:
+                    from: gestt_sent
+                    to:   gestt_rejected
+                    metadata:
+                        title: 'Refuser sur GESTT'
+                completed:
+                    from: gestt_approved
+                    to:   completed
+                    metadata:
+                        title: 'Compléter'
+                pay:
+                    from: completed
+                    to:   paid
+                    metadata:
+                        title: 'Payer'
+                

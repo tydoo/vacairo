@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr" data-fr-scheme="system">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+		<meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+		<meta content="Application de gestion des vacations en ROPN" name="description"/>
+		<title>Vacairo |
+			{% block title '' %}
+		</title>
+		<link rel="apple-touch-icon" href="{{ asset('images/favicon/apple-touch-icon.png') }}">
+		<link rel="icon" href="{{ asset('images/favicon/favicon.svg') }}" type="image/svg+xml">
+		<link rel="shortcut icon" href="{{ asset('images/favicon/favicon.ico') }}" type="image/x-icon">
+		{% block javascripts %}
+			{% block importmap %}
+				{{ importmap('app') }}
+			{% endblock %}
+		{% endblock %}
+	</head>
+	<body x-data="{ page: '{{app.request.attributes.get('_route')}}', 'loaded': true, 'darkMode': false, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }" x-init="darkMode = JSON.parse(localStorage.getItem('darkMode'));$watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))" :class="{'dark bg-gray-900': darkMode === true}">
+		{% include "_toast.html.twig" %}
+		{% block layout '' %}
+	</body>
+</html>

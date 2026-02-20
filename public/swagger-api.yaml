@@ -1,0 +1,62 @@
+openapi: 3.1.2
+info:
+  title: API de l'application Vacairo
+  version: '1.0'
+  description: API pour un usage interne à l'application
+servers:
+  - url: /api/v1
+paths:
+  /hello:
+    get:
+      tags:
+        - Test
+      summary: Test de l'API
+      description: Test de l'API
+      operationId: hello
+      responses:
+        '200':
+          description: Hello World
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Hello World
+  /email-notify:
+    post:
+      tags:
+        - Email
+      summary: Enregistrer un email pour notification
+      description: Enregistrement d'un email pour notification
+      operationId: emailNotify
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: email@domain.com
+      responses:
+        '201':
+          description: Email enregistré pour notification
+        '400':
+          description: Email invalide ou manquant
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: Email invalide
+        '500':
+          description: L'email n'a pas pu être enregistré en base de données
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: L'email n'a pas pu être enregistré en base de données
+      
+  

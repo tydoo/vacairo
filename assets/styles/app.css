@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-fr-theme=dark], [data-fr-theme=dark] *));
+
+html,
+body {
+    @apply antialiased min-h-screen;
+}

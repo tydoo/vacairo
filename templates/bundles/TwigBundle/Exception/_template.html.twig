@@ -1,0 +1,31 @@
+{% extends 'extends/simple.html.twig' %}
+
+{% block title %}Erreur
+	{{ exception.statusCode }}
+	!
+{% endblock %}
+
+{% block body %}
+	<div class="mx-auto w-full max-w-[242px] text-center sm:max-w-[472px]">
+		<h1 class="mb-8 text-title-md font-bold text-gray-800 dark:text-white/90 xl:text-title-2xl">
+			ERREUR
+		</h1>
+
+		<img src="{{ asset('images/error/' ~ image_light) }}" alt="500" class="dark:hidden"/>
+		<img src="{{ asset('images/error/' ~ image_dark) }}" alt="500" class="hidden dark:block"/>
+
+		<p class="mb-6 mt-10 text-base text-gray-700 dark:text-gray-400 sm:text-lg">
+			{{ description }}
+		</p>
+
+		<a href="{{ path('home.home') }}" class="inline-flex items-center justify-center rounded-lg border border-gray-300 bg-white px-5 py-3.5 text-sm font-medium text-gray-700 shadow-theme-xs hover:bg-gray-50 hover:text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/3 dark:hover:text-gray-200">
+			Retourner sur la page d'accueil
+		</a>
+	</div>
+	<!-- Footer -->
+	<p class="absolute bottom-6 left-1/2 -translate-x-1/2 text-center text-sm text-gray-500 dark:text-gray-400">
+		&copy;
+		<span id="year">{{ "now"|date("Y") }}</span>
+		- VacAiro
+	</p>
+{% endblock %}

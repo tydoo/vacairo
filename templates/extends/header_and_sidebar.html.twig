@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block layout %}
+	<div class="flex h-screen overflow-hidden">
+		{% include "partials/sidebar.html.twig" %}
+
+		<div
+			class="relative flex flex-1 flex-col overflow-x-hidden overflow-y-auto">
+			<!-- Small Device Overlay Start -->
+			<div :class="sidebarToggle ? 'block xl:hidden' : 'hidden'" class="fixed z-50 h-screen w-full bg-gray-900/50"></div>
+
+			<main>
+				{% include "partials/header.html.twig" %}
+				{% block body %}{% endblock %}
+			</main>
+		</div>
+	</div>
+{% endblock %}

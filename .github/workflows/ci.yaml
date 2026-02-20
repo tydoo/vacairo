@@ -1,0 +1,46 @@
+name: Vacairo
+on:
+  push:
+    branches: [ main ]
+jobs:
+  Vaciro:
+    runs-on: ubuntu-latest
+    continue-on-error: false
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup PHP, extensions and composer with shivammathur/setup-php
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mbstring, xml, ctype, iconv, intl, pdo, pdo_mysql, dom, filter, gd, iconv, json, mbstring, pdo
+
+      - name: Cache multiple paths
+        uses: actions/cache@v4
+        with:
+          path: |
+            vendor
+          key: ${{ runner.os }}-${{ hashFiles('composer.lock') }}
+
+      - name: "Composer install"
+        run: composer install --no-interaction --no-progress
+
+      - name: Symfony CLI
+        run: |
+          curl -sS https://get.symfony.com/cli/installer | bash
+          mv /home/runner/.symfony5/bin/symfony /usr/local/bin/symfony
+
+      - name: Symfony Check Vulnerabilities
+        run: symfony check:security
+
+      - name: Lint YAML files
+        run: symfony console lint:yaml config --parse-tags
+
+      - name: Lint Twig templates
+        run: symfony console lint:twig templates --env=prod
+
+      - name: Lint Parameters and Services
+        run: symfony console lint:container --no-debug
+
+      - name: Lint Doctrine entities
+        run: symfony console doctrine:schema:validate --skip-sync -vvv --no-interaction

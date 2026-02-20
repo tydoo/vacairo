@@ -1,0 +1,11 @@
+knpu_oauth2_client:
+    clients:
+        proconnect:
+            type: generic
+            provider_class: App\Security\ProConnectProvider
+            client_id: '%env(PROCONNECT_CLIENT_ID)%'
+            client_secret: '%env(PROCONNECT_CLIENT_SECRET)%'
+            redirect_route: security.login.sso.redirect
+            redirect_params: {}
+            provider_options:
+                base_url: 'https://%env(PROCONNECT_DOMAIN)%'
