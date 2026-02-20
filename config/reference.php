@@ -1548,15 +1548,13 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     }>
  * }
  */
-final class App
-{
+final class App {
     /**
      * @param ConfigType $config
      *
      * @psalm-return ConfigType
      */
-    public static function config(array $config): array
-    {
+    public static function config(array $config): array {
         return AppReference::config($config);
     }
 }
@@ -1625,15 +1623,13 @@ namespace Symfony\Component\Routing\Loader\Configurator;
  *     ...<string, RouteConfig|ImportConfig|AliasConfig>
  * }
  */
-final class Routes
-{
+final class Routes {
     /**
      * @param RoutesConfig $config
      *
      * @psalm-return RoutesConfig
      */
-    public static function config(array $config): array
-    {
+    public static function config(array $config): array {
         return $config;
     }
 }
