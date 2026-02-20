@@ -2,12 +2,11 @@
 
 [![Vacairo](https://github.com/tydoo/vacairo/actions/workflows/ci.yaml/badge.svg)](https://github.com/tydoo/vacairo/actions/workflows/ci.yaml)
 
+Vacairo est une application non officielle à destination des réservistes de la police nationale afin de pouvoir gérer leurs vacations.
 
-Vacairo est une application non officiel à destination des réservistes de la police nationale afin de pouvoir gérer leurs vacations.
+Aucune information personnelle n'est sauvegardée par l'application.
 
-Aucune infomration personnelle n'est sauvegardée par l'application.
-
-Elle tourne sous Symfony 8.
+Elle utilise le framework Symfony 8.
 
 ## Installation d'un environnement de développement
 
